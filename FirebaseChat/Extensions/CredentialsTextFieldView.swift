@@ -1,0 +1,41 @@
+//
+//  CredentialsTextFieldView.swift
+//  FirebaseChat
+//
+//  Created by Michał Szpyruk on 13/07/2020.
+//  Copyright © 2020 Michał Szpyruk. All rights reserved.
+//
+
+import UIKit
+
+class CredentialsTextFieldView: UIView {
+    
+    init(image: UIImage?, textField: UITextField) {
+        super.init(frame: .zero)
+        
+        setHeight(height: 50)
+        
+        let iv = UIImageView()
+        iv.image = image
+        iv.tintColor = .white
+        iv.alpha = 0.85
+        
+        addSubview(iv)
+        iv.centerY(inView: self)
+        iv.anchor(left: leftAnchor, paddingLeft: 8)
+        iv.setDimensions(height: 28, width: 28)
+        
+        addSubview(textField)
+        textField.centerY(inView: self)
+        textField.anchor(left: iv.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8)
+        
+        let divider = UIView()
+        divider.backgroundColor = .white
+        addSubview(divider)
+        divider.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 8, height: 0.7)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
