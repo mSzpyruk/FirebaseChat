@@ -12,6 +12,8 @@ class RegistrationController: UIViewController {
     
     //MARK: - Properties
     
+    var viewModel = RegistrationViewModel()
+    
     private let photoPickerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "camera-border").withRenderingMode(.alwaysOriginal), for: .normal)
@@ -46,7 +48,6 @@ class RegistrationController: UIViewController {
     let button = CustomAuthButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.setTitleColor(#colorLiteral(red: 0.2705882353, green: 0.5218564868, blue: 0.7714765668, alpha: 1), for: .normal)
         return button
     }()
     
@@ -67,6 +68,7 @@ class RegistrationController: UIViewController {
         super.viewDidLoad()
         
         configureView()
+        configureNotificationObservers()
     }
     
     //MARK: - Selectors
@@ -79,7 +81,33 @@ class RegistrationController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc func textDidChange(_ sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else if sender == fullnameTextField {
+            viewModel.fullname = sender.text
+        } else if sender == nicknameTextField {
+            viewModel.nickname = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        updateForm()
+    }
+    
     //MARK: - Helpers
+    
+    func updateForm() {
+        registrationButton.isEnabled = viewModel.shouldEnableButton
+        registrationButton.backgroundColor = viewModel.buttonBackgroundColor
+        registrationButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+    }
+    
+    func configureNotificationObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        nicknameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
     
     fileprivate func configureView() {
         view.backgroundColor = .systemPurple

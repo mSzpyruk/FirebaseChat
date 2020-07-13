@@ -9,14 +9,15 @@
 import UIKit
 
 class CustomAuthButton: UIButton {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 0.9781557918, green: 0.7131732106, blue: 0.7130097747, alpha: 1)
+        
         layer.cornerRadius = 5
+        backgroundColor = #colorLiteral(red: 0.9214009643, green: 0.534648478, blue: 0.5309287906, alpha: 1).withAlphaComponent(0.5)
         setHeight(height: 50)
         isEnabled = false
-        setTitleColor(.white, for: .normal)
+        setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
     }
     
     required init?(coder: NSCoder) {

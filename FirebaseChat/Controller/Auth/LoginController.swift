@@ -12,6 +12,8 @@ class LoginController: UIViewController {
     
     //MARK: - Properties
     
+    var viewModel = LoginViewModel()
+    
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "speech bubbles (rounded)-communication-color")
@@ -34,7 +36,6 @@ class LoginController: UIViewController {
         let button = CustomAuthButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.setTitleColor(#colorLiteral(red: 0.2705882353, green: 0.5218564868, blue: 0.7714765668, alpha: 1), for: .normal)
         return button
     }()
     
@@ -42,7 +43,7 @@ class LoginController: UIViewController {
         let button = UIButton(type: .system)
         
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 16)])
-            attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
@@ -55,6 +56,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         configureView()
+        configureNotificationObservers()
     }
     
     //MARK: - Selectors
@@ -63,7 +65,27 @@ class LoginController: UIViewController {
         navigationController?.pushViewController(RegistrationController(), animated: true)
     }
     
+    @objc func textDidChange(_ sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        updateForm()
+    }
+    
     //MARK: - Helpers
+    
+    func configureNotificationObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
+    func updateForm() {
+        loginButton.isEnabled = viewModel.shouldEnableButton
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+    }
     
     fileprivate func configureView() {
         navigationController?.navigationBar.isHidden = true
