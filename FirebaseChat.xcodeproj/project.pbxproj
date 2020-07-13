@@ -19,6 +19,7 @@
 		3EDA1DED24BCE5F500EA73A7 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DEC24BCE5F500EA73A7 /* RegistrationController.swift */; };
 		3EDA1DEF24BCEFE900EA73A7 /* CredentialsTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DEE24BCEFE900EA73A7 /* CredentialsTextFieldView.swift */; };
 		3EDA1DF124BCF1C500EA73A7 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF024BCF1C500EA73A7 /* CustomTextField.swift */; };
+		3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3EDA1DEC24BCE5F500EA73A7 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		3EDA1DEE24BCEFE900EA73A7 /* CredentialsTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTextFieldView.swift; sourceTree = "<group>"; };
 		3EDA1DF024BCF1C500EA73A7 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				3EDA1DDF24BCDC2100EA73A7 /* Extensions.swift */,
 				3EDA1DEE24BCEFE900EA73A7 /* CredentialsTextFieldView.swift */,
 				3EDA1DF024BCF1C500EA73A7 /* CustomTextField.swift */,
+				3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				3EDA1DEF24BCEFE900EA73A7 /* CredentialsTextFieldView.swift in Sources */,
 				3EDA1DCC24BCDBB800EA73A7 /* AppDelegate.swift in Sources */,
 				3EDA1DE924BCDD2E00EA73A7 /* ConversationsController.swift in Sources */,
+				3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */,
 				3EDA1DCE24BCDBB800EA73A7 /* SceneDelegate.swift in Sources */,
 				3EDA1DE024BCDC2100EA73A7 /* Extensions.swift in Sources */,
 				3EDA1DF124BCF1C500EA73A7 /* CustomTextField.swift in Sources */,

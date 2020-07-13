@@ -14,8 +14,7 @@ class LoginController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "messages-communication-color")
-        iv.tintColor = .white
+        iv.image = #imageLiteral(resourceName: "speech bubbles (rounded)-communication-color")
         return iv
     }()
     
@@ -23,28 +22,28 @@ class LoginController: UIViewController {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blend"), textField: emailTextField)
     }()
     
+    private var emailTextField = CustomTextField(placeholder: "Email")
+    
     private lazy var passwordContainerView: CredentialsTextFieldView = {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "lock-object-color"), textField: passwordTextField)
     }()
     
-    private var emailTextField = CustomTextField(placeholder: "Email")
-    
     private var passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
     
-    private let loginButton: UIButton = {
-        let button = UIButton(type: .system)
+    private let loginButton: CustomAuthButton = {
+        let button = CustomAuthButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 5
-        button.setHeight(height: 50)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.backgroundColor = .cyan
+        button.setTitleColor(#colorLiteral(red: 0.2705882353, green: 0.5218564868, blue: 0.7714765668, alpha: 1), for: .normal)
         return button
     }()
     
     private let goToRegistrationButton: UIButton = {
         let button = UIButton(type: .system)
+        
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
+            attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
         return button
@@ -61,7 +60,7 @@ class LoginController: UIViewController {
     //MARK: - Selectors
     
     @objc func handleShowRegistration() {
-        
+        navigationController?.pushViewController(RegistrationController(), animated: true)
     }
     
     //MARK: - Helpers
@@ -75,7 +74,7 @@ class LoginController: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.centerX(inView: view)
         logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
-        logoImageView.setDimensions(height: 150, width: 150)
+        logoImageView.setDimensions(height: 200, width: 200)
         
         let loginStack = UIStackView(arrangedSubviews: [emailContainerView,
                                                         passwordContainerView,
