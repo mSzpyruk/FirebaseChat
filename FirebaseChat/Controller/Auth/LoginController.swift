@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -24,28 +25,23 @@ class LoginController: UIViewController {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blend"), textField: emailTextField)
     }()
     
-    private var emailTextField = CustomTextField(placeholder: "Email")
-    
     private lazy var passwordContainerView: CredentialsTextFieldView = {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "lock-object-color"), textField: passwordTextField)
     }()
     
+    private var emailTextField = CustomTextField(placeholder: "Email")
     private var passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
     
     private let loginButton: CustomAuthButton = {
         let button = CustomAuthButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(self, action: #selector(handleUserLogIn), for: .touchUpInside)
         return button
     }()
     
-    private let goToRegistrationButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
-        
-        button.setAttributedTitle(attributedTitle, for: .normal)
+    private let goToRegistrationButton: CustomGoToButton = {
+        let button = CustomGoToButton(placeholder: "Don't have an account?", actionString: "Sign Up")
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
         return button
     }()
@@ -57,6 +53,21 @@ class LoginController: UIViewController {
         
         configureView()
         configureNotificationObservers()
+    }
+    
+    //MARK: - API
+    
+    @objc func handleUserLogIn() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+
+        Service.shared.logUserIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     //MARK: - Selectors
@@ -91,7 +102,7 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
         
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .white
         
         view.addSubview(logoImageView)
         logoImageView.centerX(inView: view)

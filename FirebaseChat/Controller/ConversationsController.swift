@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "ConversationCell"
 
@@ -22,14 +23,43 @@ class ConversationsController: UIViewController {
         super.viewDidLoad()
         
         configureView()
+        checkIfUserIsLogged()
     }
     
     //MARK: - Selectors
     @objc fileprivate func showProfile() {
-        print(1)
+        logOut()
+    }
+    
+    //MARK: - API
+    
+    func checkIfUserIsLogged() {
+        if Auth.auth().currentUser?.uid == nil {
+            presentLoginScreen()
+        } else {
+            print(123)
+        }
+    }
+    
+    func logOut() {
+        do {
+            try Auth.auth().signOut()
+            presentLoginScreen()
+        } catch {
+            print("logged out")
+        }
     }
     
     //MARK: - Helpers
+    
+    func presentLoginScreen() {
+        DispatchQueue.main.async {
+             let controller = LoginController()
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
+    }
     
     fileprivate func configureView() {
         view.backgroundColor = .white
@@ -71,6 +101,7 @@ class ConversationsController: UIViewController {
     }
 }
 
+//MARK: - TableViewDataSource
 extension ConversationsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -83,6 +114,7 @@ extension ConversationsController: UITableViewDataSource {
     }
 }
 
+//MARK: - TableViewDelegate
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)

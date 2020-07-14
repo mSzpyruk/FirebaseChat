@@ -18,6 +18,7 @@ class CustomAuthButton: UIButton {
         setHeight(height: 50)
         isEnabled = false
         setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
     required init?(coder: NSCoder) {

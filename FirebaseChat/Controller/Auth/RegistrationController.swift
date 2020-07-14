@@ -7,59 +7,55 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
     //MARK: - Properties
     
-    var viewModel = RegistrationViewModel()
+    private var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage?
     
     private let photoPickerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "photograph-user").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.layer.masksToBounds = true
-        button.contentMode = .scaleAspectFill
+        button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
     
     private lazy var emailContainerView: CredentialsTextFieldView = {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blend"), textField: emailTextField)
     }()
-    
-    private var emailTextField = CustomTextField(placeholder: "Email")
-    
+        
     private lazy var fullnameContainerView: CredentialsTextFieldView = {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "profile-blue"), textField: fullnameTextField)
     }()
     
-    private var fullnameTextField = CustomTextField(placeholder: "Full Name")
-
     private lazy var nicknameContainerView: CredentialsTextFieldView = {
-        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "user-user-color"), textField: nicknameTextField)
+        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "user profile-user-color"), textField: nicknameTextField)
     }()
-    private var nicknameTextField = CustomTextField(placeholder: "Nickname")
 
     private lazy var passwordContainerView: CredentialsTextFieldView = {
         return CredentialsTextFieldView(image: #imageLiteral(resourceName: "lock-object-color"), textField: passwordTextField)
     }()
     
+    private var nicknameTextField = CustomTextField(placeholder: "Nickname")
+    private var fullnameTextField = CustomTextField(placeholder: "Full Name")
+    private var emailTextField = CustomTextField(placeholder: "Email")
     private var passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
 
     private let registrationButton: CustomAuthButton = {
-    let button = CustomAuthButton(type: .system)
+        let button = CustomAuthButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(self, action: #selector(handleCreateAccount), for: .touchUpInside)
         return button
     }()
     
-    private let goToLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Log In", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
-        
-        button.setAttributedTitle(attributedTitle, for: .normal)
+    private let goToLoginButton: CustomGoToButton = {
+        let button = CustomGoToButton(placeholder: "Already have an account?", actionString: "Log In")
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button
     }()
@@ -74,6 +70,24 @@ class RegistrationController: UIViewController {
     }
     
     //MARK: - Selectors
+    
+    @objc func handleCreateAccount() {
+        guard let email = emailTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        guard let nickname = nicknameTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let profileImage = profileImage else { return }
+        
+        let credentials = RegistrationCredentials(email: email, fullname: fullname, nickname: nickname, password: password, profileImage: profileImage)
+        
+        Service.shared.logUserOut(credentials: credentials) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     @objc func handleSelectPhoto() {
         let imagePicker = UIImagePickerController()
@@ -113,19 +127,20 @@ class RegistrationController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
+    //MARK: - Helper - Configure View
     fileprivate func configureView() {
         view.backgroundColor = .systemPurple
-
+        
         view.addSubview(photoPickerButton)
         photoPickerButton.centerX(inView: view)
         photoPickerButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         photoPickerButton.setDimensions(height: 200, width: 200)
         
         let registrationStack = UIStackView(arrangedSubviews: [emailContainerView,
-                                                        fullnameContainerView,
-                                                        nicknameContainerView,
-                                                        passwordContainerView,
-                                                        registrationButton])
+                                                               fullnameContainerView,
+                                                               nicknameContainerView,
+                                                               passwordContainerView,
+                                                               registrationButton])
         registrationStack.axis = .vertical
         registrationStack.spacing = 16
         
@@ -134,13 +149,14 @@ class RegistrationController: UIViewController {
         
         view.addSubview(goToLoginButton)
         goToLoginButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
-        }
+    }
 }
 
 //MARK: - Image Picker Delegate
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
+        profileImage = image
         photoPickerButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         photoPickerButton.layer.borderColor = UIColor.white.cgColor
         photoPickerButton.layer.borderWidth = 1
@@ -148,3 +164,4 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
     }
 }
+

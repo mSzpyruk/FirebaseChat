@@ -29,10 +29,10 @@ class CredentialsTextFieldView: UIView {
         textField.centerY(inView: self)
         textField.anchor(left: iv.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8)
         
-        let divider = UIView()
-        divider.backgroundColor = .white
-        addSubview(divider)
-        divider.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 8, height: 0.7)
+        let bottomBorder = UIView()
+        bottomBorder.backgroundColor = .black
+        addSubview(bottomBorder)
+        bottomBorder.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1)
     }
     
     required init?(coder: NSCoder) {
