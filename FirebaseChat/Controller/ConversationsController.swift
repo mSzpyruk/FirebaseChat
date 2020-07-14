@@ -17,6 +17,16 @@ class ConversationsController: UIViewController {
     
     private let tableView = UITableView()
     
+    private let newChatButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.backgroundColor = .systemPink
+        button.tintColor = .white
+        button.imageView?.setDimensions(height: 24, width: 24)
+        button.addTarget(self, action: #selector(showNewChat), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -27,8 +37,16 @@ class ConversationsController: UIViewController {
     }
     
     //MARK: - Selectors
+    
     @objc fileprivate func showProfile() {
         logOut()
+    }
+    
+    @objc func showNewChat() {
+        let controller = NewChatController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
     //MARK: - API
@@ -64,8 +82,15 @@ class ConversationsController: UIViewController {
     fileprivate func configureView() {
         view.backgroundColor = .white
         
-        configureNavigationBar()
+        configureNavigationBar(withTitle: "Chat Rooms", prefersLargeTitles: true)
         configureTableView()
+        
+        view.addSubview(newChatButton)
+        newChatButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 16, paddingRight: 32, width: 56, height: 56)
+        newChatButton.layer.cornerRadius = 56 / 2
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(showProfile))
+
     }
     
     fileprivate func configureTableView() {
@@ -80,24 +105,6 @@ class ConversationsController: UIViewController {
         view.addSubview(tableView)
         tableView.frame = view.frame
 
-    }
-    
-    fileprivate func configureNavigationBar() {
-        let barAppearance = UINavigationBarAppearance()
-        barAppearance.configureWithOpaqueBackground()
-        barAppearance.backgroundColor = .systemBlue
-        barAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        navigationItem.title = "Messages"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(showProfile))
-
-        navigationController?.navigationBar.standardAppearance = barAppearance
-        navigationController?.navigationBar.compactAppearance = barAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
-        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = true
     }
 }
 
