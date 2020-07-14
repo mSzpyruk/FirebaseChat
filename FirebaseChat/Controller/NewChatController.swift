@@ -13,12 +13,21 @@ class NewChatController: UITableViewController {
     
     //MARK: - Properties
     
+    private var users = [User]()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
+        FirebaseService.fetchUsers { (users) in
+            self.users = users
+            self.tableView.reloadData()
+
+//            DispatchQueue.main.async {
+//            }
+        }
     }
     
     //MARK: - Selectors
@@ -42,7 +51,7 @@ class NewChatController: UITableViewController {
 extension NewChatController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
