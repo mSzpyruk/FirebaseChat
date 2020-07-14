@@ -22,7 +22,6 @@
 		3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */; };
 		3EDA1DF824BD009900EA73A7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF724BD009900EA73A7 /* AuthViewModel.swift */; };
 		3EDA1DFA24BD0C2900EA73A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF924BD0C2800EA73A7 /* GoogleService-Info.plist */; };
-		3EDA1DFC24BD90E100EA73A7 /* CustomGoToButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DFB24BD90E100EA73A7 /* CustomGoToButton.swift */; };
 		3EDA1DFE24BD967400EA73A7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DFD24BD967400EA73A7 /* Service.swift */; };
 		6B93CB5B97891085CE71212A /* Pods_FirebaseChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868357618BB4FEEA28CD0ABC /* Pods_FirebaseChat.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +44,6 @@
 		3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthButton.swift; sourceTree = "<group>"; };
 		3EDA1DF724BD009900EA73A7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		3EDA1DF924BD0C2800EA73A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3EDA1DFB24BD90E100EA73A7 /* CustomGoToButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGoToButton.swift; sourceTree = "<group>"; };
 		3EDA1DFD24BD967400EA73A7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4D864E93F7ABD543928C5DED /* Pods-FirebaseChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseChat.release.xcconfig"; path = "Target Support Files/Pods-FirebaseChat/Pods-FirebaseChat.release.xcconfig"; sourceTree = "<group>"; };
 		868357618BB4FEEA28CD0ABC /* Pods_FirebaseChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,7 +146,6 @@
 				3EDA1DEE24BCEFE900EA73A7 /* CredentialsTextFieldView.swift */,
 				3EDA1DF024BCF1C500EA73A7 /* CustomTextField.swift */,
 				3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */,
-				3EDA1DFB24BD90E100EA73A7 /* CustomGoToButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,7 +311,6 @@
 				3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */,
 				3EDA1DF824BD009900EA73A7 /* AuthViewModel.swift in Sources */,
 				3EDA1DCE24BCDBB800EA73A7 /* SceneDelegate.swift in Sources */,
-				3EDA1DFC24BD90E100EA73A7 /* CustomGoToButton.swift in Sources */,
 				3EDA1DE024BCDC2100EA73A7 /* Extensions.swift in Sources */,
 				3EDA1DF124BCF1C500EA73A7 /* CustomTextField.swift in Sources */,
 			);

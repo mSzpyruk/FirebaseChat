@@ -31,7 +31,7 @@ struct Service {
         
         reference.putData(imageData, metadata: nil) { (metadata, error) in
             if let error = error {
-                print(error.localizedDescription)
+                completion!(error)
                 return
             }
             
@@ -40,7 +40,7 @@ struct Service {
                 
                 Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { (result, error) in
                     if let error = error {
-                        print(error.localizedDescription)
+                        completion!(error)
                         return
                     }
                     

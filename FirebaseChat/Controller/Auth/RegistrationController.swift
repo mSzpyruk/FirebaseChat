@@ -54,8 +54,11 @@ class RegistrationController: UIViewController {
         return button
     }()
     
-    private let goToLoginButton: CustomGoToButton = {
-        let button = CustomGoToButton(placeholder: "Already have an account?", actionString: "Log In")
+    private let goToLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 16)])
+        attributedTitle.append(NSAttributedString(string: "Log In", attributes: [.foregroundColor: UIColor.red, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button
     }()
@@ -80,11 +83,15 @@ class RegistrationController: UIViewController {
         
         let credentials = RegistrationCredentials(email: email, fullname: fullname, nickname: nickname, password: password, profileImage: profileImage)
         
+        showProgressLoader(true, withText: "Signing Up")
+        
         Service.shared.logUserOut(credentials: credentials) { (error) in
             if let error = error {
                 print(error.localizedDescription)
+                self.showProgressLoader(false)
                 return
             }
+            self.showProgressLoader(false)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -112,6 +119,18 @@ class RegistrationController: UIViewController {
         updateForm()
     }
     
+    @objc func keyboardShow() {
+        if view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keyboardHide() {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     //MARK: - Helpers
     
     func updateForm() {
@@ -125,11 +144,15 @@ class RegistrationController: UIViewController {
         fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         nicknameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
     
     //MARK: - Helper - Configure View
     fileprivate func configureView() {
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .white
         
         view.addSubview(photoPickerButton)
         photoPickerButton.centerX(inView: view)

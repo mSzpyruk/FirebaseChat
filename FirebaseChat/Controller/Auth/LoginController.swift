@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class LoginController: UIViewController {
     
@@ -40,8 +41,11 @@ class LoginController: UIViewController {
         return button
     }()
     
-    private let goToRegistrationButton: CustomGoToButton = {
-        let button = CustomGoToButton(placeholder: "Don't have an account?", actionString: "Sign Up")
+    private let goToRegistrationButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 16)])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.red, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
         return button
     }()
@@ -60,18 +64,23 @@ class LoginController: UIViewController {
     @objc func handleUserLogIn() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-
+        
+        showProgressLoader(true, withText: "Logging in")
+        
         Service.shared.logUserIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print(error.localizedDescription)
+                self.showProgressLoader(false)
                 return
             }
+            self.showProgressLoader(false)
             self.dismiss(animated: true, completion: nil)
         }
     }
     
     //MARK: - Selectors
     
+
     @objc func handleShowRegistration() {
         navigationController?.pushViewController(RegistrationController(), animated: true)
     }

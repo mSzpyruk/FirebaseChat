@@ -11,5 +11,6 @@ target 'FirebaseChat' do
 	pod 'Firebase/Storage'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Firestore'
+	pod 'JGProgressHUD'
 
 end

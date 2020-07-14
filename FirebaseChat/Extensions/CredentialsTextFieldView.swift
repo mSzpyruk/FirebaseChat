@@ -22,12 +22,12 @@ class CredentialsTextFieldView: UIView {
         
         addSubview(iv)
         iv.centerY(inView: self)
-        iv.anchor(left: leftAnchor, paddingLeft: 8)
+        iv.anchor(right: rightAnchor, paddingRight: 8)
         iv.setDimensions(height: 28, width: 28)
         
         addSubview(textField)
         textField.centerY(inView: self)
-        textField.anchor(left: iv.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8)
+        textField.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8)
         
         let bottomBorder = UIView()
         bottomBorder.backgroundColor = .black

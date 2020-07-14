@@ -7,11 +7,26 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 public struct AnchoredConstraints {
     public var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
 }
 
+extension UIViewController {
+    static let hud = JGProgressHUD(style: .light)
+    func showProgressLoader(_ show: Bool, withText text: String? = "Loading") {
+        view.endEditing(true)
+        UIViewController.hud.textLabel.text = text
+        
+        if show {
+            UIViewController.hud.show(in: view)
+        } else {
+            UIViewController.hud.dismiss()
+        }
+    }
+}
+ 
 extension UIView {
     
     func anchor(top: NSLayoutYAxisAnchor? = nil,
