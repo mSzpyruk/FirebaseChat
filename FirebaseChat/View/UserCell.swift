@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserCell: UITableViewCell {
     
     //MARK: - Properties
+    
+    var user: User? {
+        didSet {
+            configure()
+        }
+    }
     
     private let profileImageView: UIImageView = {
        let iv = UIImageView()
@@ -20,7 +27,7 @@ class UserCell: UITableViewCell {
         return iv
     }()
     
-    private let nicknamLabel: UILabel = {
+    private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.textColor = .systemPink
@@ -45,7 +52,7 @@ class UserCell: UITableViewCell {
         profileImageView.anchor(left: leftAnchor, paddingLeft: 12, width: 64, height: 63)
         profileImageView.layer.cornerRadius = 64 / 2
         
-        let stack = UIStackView(arrangedSubviews: [nicknamLabel, fullnameLabel])
+        let stack = UIStackView(arrangedSubviews: [nicknameLabel, fullnameLabel])
         stack.axis = .vertical
         stack.spacing = 2
         
@@ -55,5 +62,15 @@ class UserCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Helpers
+    
+    func configure() {
+        guard let user = user else { return }
+        guard let url = URL(string: user.profileImageUrl) else { return}
+        fullnameLabel.text = user.fullname
+        nicknameLabel.text = user.nickname
+        profileImageView.sd_setImage(with: url)
     }
 }
