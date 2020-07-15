@@ -73,6 +73,7 @@ class ConversationsController: UIViewController {
     func presentLoginScreen() {
         DispatchQueue.main.async {
              let controller = LoginController()
+            controller.delegate = self
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
@@ -125,5 +126,13 @@ extension ConversationsController: UITableViewDataSource {
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+}
+
+extension ConversationsController: NewChatControllerDelegate {
+    func controller(_ controller: NewChatController, wantsToChatWith user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        let chat = ChatController(user: user)
+        navigationController?.pushViewController(chat, animated: true)
     }
 }
