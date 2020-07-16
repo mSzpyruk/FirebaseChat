@@ -26,6 +26,7 @@ class MessageCell: UICollectionViewCell {
         tv.font = .systemFont(ofSize: 16)
         tv.isScrollEnabled = false
         tv.text = "asdassdasadsadsadsadsdasdasd"
+        tv.isEditable = false
         tv.textColor = .white
         return tv
     }()
