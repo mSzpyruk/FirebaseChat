@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E38DAC524BF88BC0091DAF7 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38DAC424BF88BC0091DAF7 /* ChatController.swift */; };
 		3E38DAC724BF90300091DAF7 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38DAC624BF90300091DAF7 /* InputView.swift */; };
+		3E38DAC924C0C6F00091DAF7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38DAC824C0C6F00091DAF7 /* MessageCell.swift */; };
 		3EDA1DCC24BCDBB800EA73A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCB24BCDBB800EA73A7 /* AppDelegate.swift */; };
 		3EDA1DCE24BCDBB800EA73A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCD24BCDBB800EA73A7 /* SceneDelegate.swift */; };
 		3EDA1DD024BCDBB800EA73A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCF24BCDBB800EA73A7 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		3E38DAC424BF88BC0091DAF7 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		3E38DAC624BF90300091DAF7 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		3E38DAC824C0C6F00091DAF7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3EDA1DC824BCDBB800EA73A7 /* FirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EDA1DCB24BCDBB800EA73A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		3EDA1DCD24BCDBB800EA73A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				3EDA1E0124BE314100EA73A7 /* UserCell.swift */,
+				3E38DAC824C0C6F00091DAF7 /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				3EDA1E0224BE314100EA73A7 /* UserCell.swift in Sources */,
 				3EDA1DCC24BCDBB800EA73A7 /* AppDelegate.swift in Sources */,
 				3EDA1E0424BE377300EA73A7 /* User.swift in Sources */,
+				3E38DAC924C0C6F00091DAF7 /* MessageCell.swift in Sources */,
 				3EDA1DE924BCDD2E00EA73A7 /* ConversationsController.swift in Sources */,
 				3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */,
 				3EDA1DF824BD009900EA73A7 /* AuthViewModel.swift in Sources */,
