@@ -18,6 +18,9 @@ class MessageCell: UICollectionViewCell {
         }
     }
     
+    var textLeftSide: NSLayoutConstraint!
+    var textRightSide: NSLayoutConstraint!
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -54,9 +57,15 @@ class MessageCell: UICollectionViewCell {
         
         addSubview(messageContainer)
         messageContainer.layer.cornerRadius = 12
-        messageContainer.anchor(top: topAnchor, left: profileImageView.rightAnchor, paddingLeft: 12)
+        messageContainer.anchor(top: topAnchor)
         messageContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 250).isActive = true
         
+        textLeftSide = messageContainer.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12)
+        textLeftSide.isActive = false
+
+        textRightSide = messageContainer.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
+        textRightSide.isActive = false
+
         messageContainer.addSubview(textView)
         textView.anchor(top: messageContainer.topAnchor, left: messageContainer.leftAnchor, bottom: messageContainer.bottomAnchor, right: messageContainer.rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 4, paddingRight: 12)
     }
@@ -66,11 +75,17 @@ class MessageCell: UICollectionViewCell {
     }
     
     //MARK: - Helpers
+    
     func configure() {
         guard let message = message else { return }
         let viewModel = MessageViewModel(message: message)
         messageContainer.backgroundColor = viewModel.messageBackgroundColor
         textView.textColor = viewModel.messageTextColor
         textView.text = message.text
+        
+        textLeftSide.isActive = viewModel.leftTextSide
+        textRightSide.isActive = viewModel.rightTextSide
+        
+        profileImageView.isHidden = viewModel.shouldHideProfileImage
     }
 }
