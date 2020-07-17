@@ -12,8 +12,14 @@ class MessageCell: UICollectionViewCell {
     
     //MARK: - Properties
     
+    var message: Message? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
-       let iv = UIImageView()
+        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
@@ -21,23 +27,22 @@ class MessageCell: UICollectionViewCell {
     }()
     
     private let textView: UITextView = {
-       let tv = UITextView()
+        let tv = UITextView()
         tv.backgroundColor = .clear
         tv.font = .systemFont(ofSize: 16)
         tv.isScrollEnabled = false
-        tv.text = "asdassdasadsadsadsadsdasdasd"
         tv.isEditable = false
         tv.textColor = .white
         return tv
     }()
     
     private let messageContainer: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .systemPurple
         return view
     }()
     
-    //MARK: - Lifecycle
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,5 +63,14 @@ class MessageCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Helpers
+    func configure() {
+        guard let message = message else { return }
+        let viewModel = MessageViewModel(message: message)
+        messageContainer.backgroundColor = viewModel.messageBackgroundColor
+        textView.textColor = viewModel.messageTextColor
+        textView.text = message.text
     }
 }

@@ -28,12 +28,15 @@ class NewChatController: UITableViewController {
         super.viewDidLoad()
         
         configureView()
+        fetchUsers()
+    }
+    
+    //MARK: - API
+    
+    func fetchUsers() {
         FirebaseService.fetchUsers { (users) in
             self.users = users
             self.tableView.reloadData()
-
-//            DispatchQueue.main.async {
-//            }
         }
     }
     
@@ -55,19 +58,20 @@ class NewChatController: UITableViewController {
     }
 }
 
+//MARK: - TableViewDataSource
+
 extension NewChatController {
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
         cell.user = users[indexPath.row]
-        
         return cell
     }
 }
+
+//MARK: - TableViewDelegate
 
 extension NewChatController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

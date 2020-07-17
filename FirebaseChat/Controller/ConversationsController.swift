@@ -105,11 +105,11 @@ class ConversationsController: UIViewController {
         
         view.addSubview(tableView)
         tableView.frame = view.frame
-
     }
 }
 
 //MARK: - TableViewDataSource
+
 extension ConversationsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -123,11 +123,14 @@ extension ConversationsController: UITableViewDataSource {
 }
 
 //MARK: - TableViewDelegate
+
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
     }
 }
+
+//MARK: - NewChatControllerDelegate
 
 extension ConversationsController: NewChatControllerDelegate {
     func controller(_ controller: NewChatController, wantsToChatWith user: User) {
