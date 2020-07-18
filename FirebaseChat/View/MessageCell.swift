@@ -57,7 +57,7 @@ class MessageCell: UICollectionViewCell {
         
         addSubview(messageContainer)
         messageContainer.layer.cornerRadius = 12
-        messageContainer.anchor(top: topAnchor)
+        messageContainer.anchor(top: topAnchor, bottom: bottomAnchor)
         messageContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 250).isActive = true
         
         textLeftSide = messageContainer.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12)
