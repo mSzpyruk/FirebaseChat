@@ -50,6 +50,16 @@ class ChatController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchMessages()
+    }
+    
+    //MARK: - API
+    
+    func fetchMessages() {
+        FirebaseService.fetchMessages(forUser: user) { (messages) in
+            self.messages = messages
+            self.collectionView.reloadData()
+        }
     }
     
     //MARK: - Helpers

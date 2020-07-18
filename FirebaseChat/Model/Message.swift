@@ -17,7 +17,7 @@ struct Message {
     var timestamp: Timestamp!
     let isFromCurrentUser: Bool
     
-    init(dictionary: [String: AnyObject]) {
+    init(dictionary: [String: Any]) {
         self.text = dictionary["text"] as? String ?? ""
         self.toUser = dictionary["toUser"] as? String ?? ""
         self.fromUser = dictionary["fromUser"] as? String ?? ""

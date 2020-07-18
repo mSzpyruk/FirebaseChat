@@ -22,6 +22,23 @@ struct FirebaseService {
         }
     }
     
+    static func fetchMessages(forUser user: User, completion: @escaping([Message]) -> Void) {
+        var messages = [Message]()
+        guard let currentUser = Auth.auth().currentUser?.uid else { return }
+        
+        let query = Firestore.firestore().collection("messages").document(currentUser).collection(user.uid).order(by: "timestamp")
+        
+        query.addSnapshotListener { (snapshot, error) in
+            snapshot?.documentChanges.forEach({ (change) in
+                if change.type == .added {
+                    let dictionary = change.document.data()
+                    messages.append(Message(dictionary: dictionary))
+                    completion(messages)
+                }
+            })
+        }
+    }
+    
    static func uploadMessage(_ message: String, user: User, completion: ((Error?) -> Void)?) {
         guard let currentUser = Auth.auth().currentUser?.uid else { return }
         
