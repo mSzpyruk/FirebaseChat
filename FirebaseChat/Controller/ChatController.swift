@@ -91,10 +91,14 @@ extension ChatController: UICollectionViewDelegateFlowLayout {
 
 extension ChatController: InputViewDelegate {
     func inputView(_ inputView: InputView, wantsToSend message: String) {
-        inputView.messageInputView.text = ""
         fromCurrentUser.toggle()
-        let message = Message(text: message, isFromCurrentUser: fromCurrentUser)
-        messages.append(message)
-        collectionView.reloadData()
+        
+        FirebaseService.uploadMessage(message, user: user) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            inputView.messageInputView.text = ""
+        }
     }
 }
