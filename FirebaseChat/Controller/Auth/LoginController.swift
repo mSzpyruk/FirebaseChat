@@ -107,6 +107,8 @@ class LoginController: UIViewController {
         loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
     }
     
+    //MARK: - Helper - Configure View
+
     fileprivate func configureView() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black

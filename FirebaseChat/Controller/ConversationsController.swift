@@ -36,20 +36,6 @@ class ConversationsController: UIViewController {
         checkIfUserIsLogged()
     }
     
-    //MARK: - Selectors
-    
-    @objc fileprivate func showProfile() {
-        logOut()
-    }
-    
-    @objc func showNewChat() {
-        let controller = NewChatController()
-        controller.delegate = self
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
-    
     //MARK: - API
     
     func checkIfUserIsLogged() {
@@ -69,6 +55,20 @@ class ConversationsController: UIViewController {
         }
     }
     
+    //MARK: - Selectors
+    
+    @objc func showProfile() {
+        logOut()
+    }
+    
+    @objc func showNewChat() {
+        let controller = NewChatController()
+        controller.delegate = self
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
     //MARK: - Helpers
     
     func presentLoginScreen() {
@@ -79,6 +79,8 @@ class ConversationsController: UIViewController {
             self.present(nav, animated: true, completion: nil)
         }
     }
+    
+    //MARK: - Helper - Configure View
     
     fileprivate func configureView() {
         view.backgroundColor = .white
@@ -94,6 +96,8 @@ class ConversationsController: UIViewController {
 
     }
     
+    //MARK: - Helper - Configure Table View
+
     fileprivate func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self

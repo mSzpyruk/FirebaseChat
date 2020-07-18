@@ -19,7 +19,6 @@ class NewChatController: UITableViewController {
     //MARK: - Properties
     
     private var users = [User]()
-    
     weak var delegate: NewChatControllerDelegate?
     
     //MARK: - Lifecycle
@@ -28,6 +27,7 @@ class NewChatController: UITableViewController {
         super.viewDidLoad()
         
         configureView()
+        configureTableView()
         fetchUsers()
     }
     
@@ -46,12 +46,17 @@ class NewChatController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - Helpers
+    //MARK: - Helper - Configure View
     
     fileprivate func configureView() {
         configureNavigationBar(withTitle: "New Chat", prefersLargeTitles: false)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
         
+    }
+    
+    //MARK: - Helper - Configure Table View
+    
+    fileprivate func configureTableView() {
         tableView.tableFooterView = UIView()
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 80

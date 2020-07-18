@@ -151,6 +151,7 @@ class RegistrationController: UIViewController {
     }
     
     //MARK: - Helper - Configure View
+    
     fileprivate func configureView() {
         view.backgroundColor = .white
         

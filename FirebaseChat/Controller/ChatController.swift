@@ -8,9 +8,8 @@
 
 import UIKit
 
-
-
 private let reuseIdentifier = "MessageCell"
+
 class ChatController: UICollectionViewController {
     
     //MARK: - Properties
@@ -46,10 +45,11 @@ class ChatController: UICollectionViewController {
     }
     
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        
+        configureView()
         fetchMessages()
     }
     
@@ -62,9 +62,9 @@ class ChatController: UICollectionViewController {
         }
     }
     
-    //MARK: - Helpers
-    
-    func configureUI() {
+    //MARK: - Helper - Configure View
+
+    fileprivate func configureView() {
         collectionView.backgroundColor = .white
         configureNavigationBar(withTitle: user.nickname, prefersLargeTitles: false)
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -81,6 +81,7 @@ extension ChatController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MessageCell
         cell.message = messages[indexPath.row]
+        cell.message?.user = user
         return cell
     }
 }

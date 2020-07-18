@@ -87,5 +87,6 @@ class MessageCell: UICollectionViewCell {
         textRightSide.isActive = viewModel.rightTextSide
         
         profileImageView.isHidden = viewModel.shouldHideProfileImage
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
     }
 }
