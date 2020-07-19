@@ -15,6 +15,7 @@ class ConversationsController: UIViewController {
     
     //MARK: - Properties
     
+    private var chats = [Chat]()
     private let tableView = UITableView()
     
     private let newChatButton: UIButton = {
@@ -34,9 +35,17 @@ class ConversationsController: UIViewController {
         
         configureView()
         checkIfUserIsLogged()
+        fetchChats()
     }
     
     //MARK: - API
+    
+    func fetchChats() {
+        FirebaseService.fetchChats { (chats) in
+            self.chats = chats
+            self.tableView.reloadData()
+        }
+    }
     
     func checkIfUserIsLogged() {
         if Auth.auth().currentUser?.uid == nil {
@@ -116,12 +125,12 @@ class ConversationsController: UIViewController {
 
 extension ConversationsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "cell"
+        cell.textLabel?.text = chats[indexPath.row].message.text
         return cell
     }
 }

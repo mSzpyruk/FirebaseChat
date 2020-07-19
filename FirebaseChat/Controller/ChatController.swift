@@ -14,10 +14,11 @@ class ChatController: UICollectionViewController {
     
     //MARK: - Properties
     
+//    var service: Service
+    
     private let user: User
     private var messages = [Message]()
     var fromCurrentUser = false
-    
     
     private lazy var inputBar: InputView = {
         let ib = InputView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
@@ -37,6 +38,7 @@ class ChatController: UICollectionViewController {
     
     init(user: User) {
         self.user = user
+//        self.service = service
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -51,6 +53,7 @@ class ChatController: UICollectionViewController {
         
         configureView()
         fetchMessages()
+//        service.test()
     }
     
     //MARK: - API
@@ -61,6 +64,7 @@ class ChatController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
+    
     
     //MARK: - Helper - Configure View
 

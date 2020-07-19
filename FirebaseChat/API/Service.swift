@@ -20,6 +20,7 @@ struct RegistrationCredentials {
 struct Service {
     static let shared = Service()
     
+    
     func logUserIn(withEmail email: String, password: String, completion: AuthDataResultCallback?) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }

@@ -19,6 +19,7 @@ class NewChatController: UITableViewController {
     //MARK: - Properties
     
     private var users = [User]()
+
     weak var delegate: NewChatControllerDelegate?
     
     //MARK: - Lifecycle
