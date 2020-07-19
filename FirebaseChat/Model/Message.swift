@@ -17,6 +17,10 @@ struct Message {
     var timestamp: Timestamp!
     let isFromCurrentUser: Bool
     
+    var chattingWith: String {
+        return isFromCurrentUser ? toUser : fromUser
+    }
+    
     init(dictionary: [String: Any]) {
         self.text = dictionary["text"] as? String ?? ""
         self.toUser = dictionary["toUser"] as? String ?? ""

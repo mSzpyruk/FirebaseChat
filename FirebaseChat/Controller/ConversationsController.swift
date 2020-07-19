@@ -15,9 +15,11 @@ class ConversationsController: UIViewController {
     
     //MARK: - Properties
     
-    private var chats = [Chat]()
-    
     private let tableView = UITableView()
+    
+    private var chats = [Chat]()
+    private var chatsDict = [String: Chat]()
+
     
     private let newChatButton: UIButton = {
         let button = UIButton(type: .system)
@@ -49,7 +51,11 @@ class ConversationsController: UIViewController {
     
     func fetchChats() {
         FirebaseService.shared.fetchChats { (chats) in
-            self.chats = chats
+            chats.forEach { (chat) in
+                let message = chat.message
+                self.chatsDict[message.chattingWith] = chat
+            }
+            self.chats = Array(self.chatsDict.values)
             self.tableView.reloadData()
         }
     }
@@ -92,6 +98,7 @@ class ConversationsController: UIViewController {
     func presentLoginScreen() {
         DispatchQueue.main.async {
             let controller = LoginController()
+            controller.delegate = self
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
@@ -166,5 +173,13 @@ extension ConversationsController: NewChatControllerDelegate {
 extension ConversationsController: ProfileControllerDelegate {
     func handleLogout() {
         logOut()
+    }
+}
+
+extension ConversationsController: AuthDelegate {
+    func authComplete() {
+        dismiss(animated: true, completion: nil)
+        configureView()
+        fetchChats()
     }
 }

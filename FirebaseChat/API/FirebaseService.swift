@@ -12,15 +12,21 @@ struct FirebaseService {
     static let shared = FirebaseService()
     
     func fetchUsers(completion: @escaping([User]) -> Void) {
-        var users = [User]()
+//        var users = [User]()
         Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
-            snapshot?.documents.forEach({ (document) in
-                
-                let dictionary = document.data()
-                let user = User(dictionary: dictionary)
-                users.append(user)
-                completion(users)
-            })
+            guard var users = snapshot?.documents.map({ User(dictionary: $0.data()) }) else { return }
+            
+            if let i = users.firstIndex(where: { $0.uid == Auth.auth().currentUser?.uid }) {
+                users.remove(at: i)
+            }
+            completion(users)
+//            snapshot?.documents.forEach({ (document) in
+//
+//                let dictionary = document.data()
+//                let user = User(dictionary: dictionary)
+//                users.append(user)
+//                completion(users)
+//            })
         }
     }
     
@@ -60,7 +66,7 @@ struct FirebaseService {
                 let dictionary = change.document.data()
                 let message = Message(dictionary: dictionary)
                 
-                self.fetchUser(with: message.toUser) { (user) in
+                self.fetchUser(with: message.chattingWith) { (user) in
                     let chat = Chat(user: user, message: message)
                     chats.append(chat)
                     completion(chats)

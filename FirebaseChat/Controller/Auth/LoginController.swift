@@ -10,9 +10,15 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+protocol AuthDelegate: class {
+    func authComplete()
+}
+
 class LoginController: UIViewController {
     
     //MARK: - Properties
+    
+    weak var delegate: AuthDelegate?
     
     var viewModel = LoginViewModel()
     
@@ -74,7 +80,7 @@ class LoginController: UIViewController {
                 return
             }
             self.showProgressLoader(false)
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authComplete()
         }
     }
     
@@ -82,7 +88,9 @@ class LoginController: UIViewController {
     
 
     @objc func handleShowRegistration() {
-        navigationController?.pushViewController(RegistrationController(), animated: true)
+        let controller = RegistrationController()
+        controller.delegate = delegate
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func textDidChange(_ sender: UITextField) {

@@ -13,6 +13,8 @@ class RegistrationController: UIViewController {
     
     //MARK: - Properties
     
+    weak var delegate: AuthDelegate?
+    
     private var viewModel = RegistrationViewModel()
     private var profileImage: UIImage?
     
@@ -92,7 +94,7 @@ class RegistrationController: UIViewController {
                 return
             }
             self.showProgressLoader(false)
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authComplete()
         }
     }
     
