@@ -16,7 +16,7 @@ class InputView: UIView {
  
     weak var delegate: InputViewDelegate?
 
-    private lazy var messageInputView: UITextView = {
+    private lazy var messageInputTextView: UITextView = {
        let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.isScrollEnabled = false
@@ -57,12 +57,12 @@ class InputView: UIView {
         sendButton.anchor(top: topAnchor, right: rightAnchor, paddingTop: 4, paddingRight: 8)
         sendButton.setDimensions(height: 50, width: 50)
         
-        addSubview(messageInputView)
-        messageInputView.anchor(top: topAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: sendButton.leftAnchor, paddingTop: 12, paddingLeft: 4, paddingBottom: 8, paddingRight: 4)
+        addSubview(messageInputTextView)
+        messageInputTextView.anchor(top: topAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: sendButton.leftAnchor, paddingTop: 12, paddingLeft: 4, paddingBottom: 8, paddingRight: 4)
         
         addSubview(placeholderLabel)
-        placeholderLabel.anchor(left: messageInputView.leftAnchor, paddingLeft: 4)
-        placeholderLabel.centerY(inView: messageInputView)
+        placeholderLabel.anchor(left: messageInputTextView.leftAnchor, paddingLeft: 4)
+        placeholderLabel.centerY(inView: messageInputTextView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChange), name: UITextView.textDidChangeNotification, object: nil)
     }
@@ -79,18 +79,18 @@ class InputView: UIView {
     //MARK: - Selectors
     
     @objc func handleTextInputChange() {
-        placeholderLabel.isHidden = !self.messageInputView.text.isEmpty
+        placeholderLabel.isHidden = !self.messageInputTextView.text.isEmpty
     }
     
     @objc func handleSendMessage() {
-        guard let message = messageInputView.text else { return }
+        guard let message = messageInputTextView.text else { return }
         delegate?.inputView(self, wantsToSend: message)
     }
     
     //MARK: - Helpers
     
     func clearInput() {
-        messageInputView.text = nil
+        messageInputTextView.text = nil
         placeholderLabel.isHidden = false
     }
 }

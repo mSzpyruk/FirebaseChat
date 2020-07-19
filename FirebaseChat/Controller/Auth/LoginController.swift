@@ -67,7 +67,7 @@ class LoginController: UIViewController {
         
         showProgressLoader(true, withText: "Logging in")
         
-        Service.shared.logUserIn(withEmail: email, password: password) { (result, error) in
+        AuthService.shared.logUserIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print(error.localizedDescription)
                 self.showProgressLoader(false)

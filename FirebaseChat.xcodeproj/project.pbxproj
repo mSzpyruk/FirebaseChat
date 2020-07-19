@@ -14,6 +14,8 @@
 		3E38DACD24C0D9910091DAF7 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E38DACC24C0D9910091DAF7 /* MessageViewModel.swift */; };
 		3E59590E24C445FF00E52B7B /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59590D24C445FF00E52B7B /* ChatCell.swift */; };
 		3E59591024C4486C00E52B7B /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59590F24C4486C00E52B7B /* ChatViewModel.swift */; };
+		3E59591224C4557A00E52B7B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59591124C4557A00E52B7B /* ProfileController.swift */; };
+		3E59591424C4624600E52B7B /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59591324C4624600E52B7B /* ProfileHeaderView.swift */; };
 		3EDA1DCC24BCDBB800EA73A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCB24BCDBB800EA73A7 /* AppDelegate.swift */; };
 		3EDA1DCE24BCDBB800EA73A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCD24BCDBB800EA73A7 /* SceneDelegate.swift */; };
 		3EDA1DD024BCDBB800EA73A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DCF24BCDBB800EA73A7 /* ViewController.swift */; };
@@ -29,7 +31,7 @@
 		3EDA1DF324BCFD3200EA73A7 /* CustomAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */; };
 		3EDA1DF824BD009900EA73A7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF724BD009900EA73A7 /* AuthViewModel.swift */; };
 		3EDA1DFA24BD0C2900EA73A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA1DF924BD0C2800EA73A7 /* GoogleService-Info.plist */; };
-		3EDA1DFE24BD967400EA73A7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DFD24BD967400EA73A7 /* Service.swift */; };
+		3EDA1DFE24BD967400EA73A7 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DFD24BD967400EA73A7 /* AuthService.swift */; };
 		3EDA1E0024BE27BE00EA73A7 /* NewChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1DFF24BE27BE00EA73A7 /* NewChatController.swift */; };
 		3EDA1E0224BE314100EA73A7 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1E0124BE314100EA73A7 /* UserCell.swift */; };
 		3EDA1E0424BE377300EA73A7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA1E0324BE377300EA73A7 /* User.swift */; };
@@ -45,6 +47,8 @@
 		3E38DACC24C0D9910091DAF7 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		3E59590D24C445FF00E52B7B /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		3E59590F24C4486C00E52B7B /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		3E59591124C4557A00E52B7B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		3E59591324C4624600E52B7B /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		3EDA1DC824BCDBB800EA73A7 /* FirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EDA1DCB24BCDBB800EA73A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		3EDA1DCD24BCDBB800EA73A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +66,7 @@
 		3EDA1DF224BCFD3200EA73A7 /* CustomAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthButton.swift; sourceTree = "<group>"; };
 		3EDA1DF724BD009900EA73A7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		3EDA1DF924BD0C2800EA73A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3EDA1DFD24BD967400EA73A7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		3EDA1DFD24BD967400EA73A7 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		3EDA1DFF24BE27BE00EA73A7 /* NewChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatController.swift; sourceTree = "<group>"; };
 		3EDA1E0124BE314100EA73A7 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		3EDA1E0324BE377300EA73A7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				3E38DAC624BF90300091DAF7 /* InputView.swift */,
+				3E59591324C4624600E52B7B /* ProfileHeaderView.swift */,
 				3EDA1E0124BE314100EA73A7 /* UserCell.swift */,
 				3E38DAC824C0C6F00091DAF7 /* MessageCell.swift */,
 				3E59590D24C445FF00E52B7B /* ChatCell.swift */,
@@ -159,6 +164,7 @@
 				3EDA1DE824BCDD2E00EA73A7 /* ConversationsController.swift */,
 				3EDA1DFF24BE27BE00EA73A7 /* NewChatController.swift */,
 				3E38DAC424BF88BC0091DAF7 /* ChatController.swift */,
+				3E59591124C4557A00E52B7B /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -166,7 +172,7 @@
 		3EDA1DE524BCDC3600EA73A7 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3EDA1DFD24BD967400EA73A7 /* Service.swift */,
+				3EDA1DFD24BD967400EA73A7 /* AuthService.swift */,
 				3EDA1E0524BE382C00EA73A7 /* FirebaseService.swift */,
 			);
 			path = API;
@@ -337,7 +343,7 @@
 				3EDA1DED24BCE5F500EA73A7 /* RegistrationController.swift in Sources */,
 				3EDA1E0024BE27BE00EA73A7 /* NewChatController.swift in Sources */,
 				3EDA1E0624BE382C00EA73A7 /* FirebaseService.swift in Sources */,
-				3EDA1DFE24BD967400EA73A7 /* Service.swift in Sources */,
+				3EDA1DFE24BD967400EA73A7 /* AuthService.swift in Sources */,
 				3E38DACD24C0D9910091DAF7 /* MessageViewModel.swift in Sources */,
 				3EDA1DD024BCDBB800EA73A7 /* ViewController.swift in Sources */,
 				3E59591024C4486C00E52B7B /* ChatViewModel.swift in Sources */,
@@ -346,6 +352,7 @@
 				3EDA1E0224BE314100EA73A7 /* UserCell.swift in Sources */,
 				3EDA1DCC24BCDBB800EA73A7 /* AppDelegate.swift in Sources */,
 				3EDA1E0424BE377300EA73A7 /* User.swift in Sources */,
+				3E59591424C4624600E52B7B /* ProfileHeaderView.swift in Sources */,
 				3E38DAC924C0C6F00091DAF7 /* MessageCell.swift in Sources */,
 				3EDA1DE924BCDD2E00EA73A7 /* ConversationsController.swift in Sources */,
 				3E59590E24C445FF00E52B7B /* ChatCell.swift in Sources */,
@@ -357,6 +364,7 @@
 				3E38DACB24C0D3730091DAF7 /* Message.swift in Sources */,
 				3EDA1DE024BCDC2100EA73A7 /* Extensions.swift in Sources */,
 				3EDA1DF124BCF1C500EA73A7 /* CustomTextField.swift in Sources */,
+				3E59591224C4557A00E52B7B /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

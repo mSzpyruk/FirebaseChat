@@ -85,7 +85,7 @@ class RegistrationController: UIViewController {
         
         showProgressLoader(true, withText: "Signing Up")
         
-        Service.shared.logUserOut(credentials: credentials) { (error) in
+        AuthService.shared.logUserOut(credentials: credentials) { (error) in
             if let error = error {
                 print(error.localizedDescription)
                 self.showProgressLoader(false)

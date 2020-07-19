@@ -14,19 +14,12 @@ class ChatCell: UITableViewCell {
     
     var chat: Chat? {
         didSet {
-            guard let chat = chat else { return }
-            
-            let viewModel = ChatViewModel(chat: chat)
-            nicknameLabel.text = chat.user.nickname
-            messageLabel.text = chat.message.text
-            
-            timestampLabel.text = viewModel.timestamp
-            profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+            configure()
         }
     }
     
     let profileImageView: UIImageView = {
-       let iv = UIImageView()
+        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
@@ -34,7 +27,7 @@ class ChatCell: UITableViewCell {
     }()
     
     let timestampLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .darkGray
         label.text = "24h"
@@ -42,13 +35,13 @@ class ChatCell: UITableViewCell {
     }()
     
     let nicknameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     let messageLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -77,5 +70,18 @@ class ChatCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Helpers
+    
+    func configure() {
+        guard let chat = chat else { return }
+        
+        let viewModel = ChatViewModel(chat: chat)
+        nicknameLabel.text = chat.user.nickname
+        messageLabel.text = chat.message.text
+        
+        timestampLabel.text = viewModel.timestamp
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
     }
 }

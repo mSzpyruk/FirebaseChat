@@ -17,8 +17,8 @@ struct RegistrationCredentials {
     let profileImage: UIImage
 }
 
-struct Service {
-    static let shared = Service()
+struct AuthService {
+    static let shared = AuthService()
     
     func logUserIn(withEmail email: String, password: String, completion: AuthDataResultCallback?) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)

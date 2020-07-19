@@ -29,7 +29,7 @@ class MessageCell: UICollectionViewCell {
         return iv
     }()
     
-    private let textView: UITextView = {
+    private let messageTextView: UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .clear
         tv.font = .systemFont(ofSize: 16)
@@ -39,7 +39,7 @@ class MessageCell: UICollectionViewCell {
         return tv
     }()
     
-    private let messageContainer: UIView = {
+    private let messageContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemPurple
         return view
@@ -55,19 +55,19 @@ class MessageCell: UICollectionViewCell {
         profileImageView.setDimensions(height: 32, width: 32)
         profileImageView.layer.cornerRadius = 32 / 2
         
-        addSubview(messageContainer)
-        messageContainer.layer.cornerRadius = 12
-        messageContainer.anchor(top: topAnchor, bottom: bottomAnchor)
-        messageContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 250).isActive = true
+        addSubview(messageContainerView)
+        messageContainerView.layer.cornerRadius = 12
+        messageContainerView.anchor(top: topAnchor, bottom: bottomAnchor)
+        messageContainerView.widthAnchor.constraint(lessThanOrEqualToConstant: 250).isActive = true
         
-        textLeftSide = messageContainer.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12)
+        textLeftSide = messageContainerView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12)
         textLeftSide.isActive = false
 
-        textRightSide = messageContainer.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
+        textRightSide = messageContainerView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
         textRightSide.isActive = false
 
-        messageContainer.addSubview(textView)
-        textView.anchor(top: messageContainer.topAnchor, left: messageContainer.leftAnchor, bottom: messageContainer.bottomAnchor, right: messageContainer.rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 4, paddingRight: 12)
+        messageContainerView.addSubview(messageTextView)
+        messageTextView.anchor(top: messageContainerView.topAnchor, left: messageContainerView.leftAnchor, bottom: messageContainerView.bottomAnchor, right: messageContainerView.rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 4, paddingRight: 12)
     }
     
     required init?(coder: NSCoder) {
@@ -79,9 +79,9 @@ class MessageCell: UICollectionViewCell {
     func configure() {
         guard let message = message else { return }
         let viewModel = MessageViewModel(message: message)
-        messageContainer.backgroundColor = viewModel.messageBackgroundColor
-        textView.textColor = viewModel.messageTextColor
-        textView.text = message.text
+        messageContainerView.backgroundColor = viewModel.messageBackgroundColor
+        messageTextView.textColor = viewModel.messageTextColor
+        messageTextView.text = message.text
         
         textLeftSide.isActive = viewModel.leftTextSide
         textRightSide.isActive = viewModel.rightTextSide
