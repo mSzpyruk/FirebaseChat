@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol GetUser {
+    func fetch() -> User
+}
+
 struct User {
     let uid: String
     let email: String

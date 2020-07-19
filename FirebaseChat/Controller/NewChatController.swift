@@ -35,7 +35,7 @@ class NewChatController: UITableViewController {
     //MARK: - API
     
     func fetchUsers() {
-        FirebaseService.fetchUsers { (users) in
+        FirebaseService.shared.fetchUsers { (users) in
             self.users = users
             self.tableView.reloadData()
         }

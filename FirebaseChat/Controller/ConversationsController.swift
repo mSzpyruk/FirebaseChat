@@ -16,6 +16,7 @@ class ConversationsController: UIViewController {
     //MARK: - Properties
     
     private var chats = [Chat]()
+
     private let tableView = UITableView()
     
     private let newChatButton: UIButton = {
@@ -41,7 +42,7 @@ class ConversationsController: UIViewController {
     //MARK: - API
     
     func fetchChats() {
-        FirebaseService.fetchChats { (chats) in
+        FirebaseService.shared.fetchChats { (chats) in
             self.chats = chats
             self.tableView.reloadData()
         }
@@ -50,8 +51,6 @@ class ConversationsController: UIViewController {
     func checkIfUserIsLogged() {
         if Auth.auth().currentUser?.uid == nil {
             presentLoginScreen()
-        } else {
-            print(123)
         }
     }
     
@@ -59,8 +58,8 @@ class ConversationsController: UIViewController {
         do {
             try Auth.auth().signOut()
             presentLoginScreen()
-        } catch {
-            print("logged out")
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     

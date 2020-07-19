@@ -14,7 +14,7 @@ class ChatController: UICollectionViewController {
     
     //MARK: - Properties
     
-//    var service: Service
+//    var service: Service?
     
     private let user: User
     private var messages = [Message]()
@@ -38,7 +38,6 @@ class ChatController: UICollectionViewController {
     
     init(user: User) {
         self.user = user
-//        self.service = service
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -53,18 +52,17 @@ class ChatController: UICollectionViewController {
         
         configureView()
         fetchMessages()
-//        service.test()
     }
     
     //MARK: - API
     
     func fetchMessages() {
-        FirebaseService.fetchMessages(forUser: user) { (messages) in
+        FirebaseService.shared.fetchMessages(forUser: user) { (messages) in
             self.messages = messages
             self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: [0, self.messages.count - 1], at: .bottom, animated: true)
         }
     }
-    
     
     //MARK: - Helper - Configure View
 

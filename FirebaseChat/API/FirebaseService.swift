@@ -9,8 +9,9 @@
 import Firebase
 
 struct FirebaseService {
+    static let shared = FirebaseService()
     
-    static func fetchUsers(completion: @escaping([User]) -> Void) {
+    func fetchUsers(completion: @escaping([User]) -> Void) {
         var users = [User]()
         Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
@@ -23,7 +24,7 @@ struct FirebaseService {
         }
     }
     
-    static func fetchUser(with uid: String, completion: @escaping(User) -> Void) {
+    func fetchUser(with uid: String, completion: @escaping(User) -> Void) {
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
             guard let dictionary = snapshot?.data() else { return }
             let user = User(dictionary: dictionary)
@@ -31,7 +32,7 @@ struct FirebaseService {
         }
     }
     
-    static func fetchMessages(forUser user: User, completion: @escaping([Message]) -> Void) {
+    func fetchMessages(forUser user: User, completion: @escaping([Message]) -> Void) {
         var messages = [Message]()
         guard let currentUser = Auth.auth().currentUser?.uid else { return }
         
@@ -48,7 +49,7 @@ struct FirebaseService {
         }
     }
     
-    static func fetchChats(completion: @escaping([Chat]) -> Void) {
+    func fetchChats(completion: @escaping([Chat]) -> Void) {
         var chats = [Chat]()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
