@@ -16,14 +16,14 @@ class InputView: UIView {
  
     weak var delegate: InputViewDelegate?
 
-    let messageInputView: UITextView = {
+    private lazy var messageInputView: UITextView = {
        let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.isScrollEnabled = false
         return tv
     }()
     
-    private let sendButton: UIButton = {
+    private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Send", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -32,7 +32,7 @@ class InputView: UIView {
         return button
     }()
     
-    private let placeholderLabel: UILabel = {
+    private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.text = "Enter Message"
         label.font = UIFont.systemFont(ofSize: 16)
@@ -87,4 +87,10 @@ class InputView: UIView {
         delegate?.inputView(self, wantsToSend: message)
     }
     
+    //MARK: - Helpers
+    
+    func clearInput() {
+        messageInputView.text = nil
+        placeholderLabel.isHidden = false
+    }
 }

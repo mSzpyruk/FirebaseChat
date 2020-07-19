@@ -68,8 +68,9 @@ class ChatController: UICollectionViewController {
 
     fileprivate func configureView() {
         collectionView.backgroundColor = .white
-        configureNavigationBar(withTitle: user.nickname, prefersLargeTitles: false)
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.keyboardDismissMode = .interactive
+        configureNavigationBar(withTitle: user.nickname, prefersLargeTitles: false)
     }
 }
 
@@ -119,7 +120,7 @@ extension ChatController: InputViewDelegate {
                 print(error.localizedDescription)
                 return
             }
-            inputView.messageInputView.text = ""
+            inputView.clearInput()
         }
     }
 }

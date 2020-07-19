@@ -16,7 +16,7 @@ class ConversationsController: UIViewController {
     //MARK: - Properties
     
     private var chats = [Chat]()
-
+    
     private let tableView = UITableView()
     
     private let newChatButton: UIButton = {
@@ -37,6 +37,12 @@ class ConversationsController: UIViewController {
         configureView()
         checkIfUserIsLogged()
         fetchChats()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        configureNavigationBar(withTitle: "Chat Rooms", prefersLargeTitles: true)
     }
     
     //MARK: - API
@@ -81,7 +87,7 @@ class ConversationsController: UIViewController {
     
     func presentLoginScreen() {
         DispatchQueue.main.async {
-             let controller = LoginController()
+            let controller = LoginController()
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
@@ -93,7 +99,6 @@ class ConversationsController: UIViewController {
     fileprivate func configureView() {
         view.backgroundColor = .white
         
-        configureNavigationBar(withTitle: "Chat Rooms", prefersLargeTitles: true)
         configureTableView()
         
         view.addSubview(newChatButton)
@@ -101,18 +106,18 @@ class ConversationsController: UIViewController {
         newChatButton.layer.cornerRadius = 56 / 2
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(showProfile))
-
+        
     }
     
     //MARK: - Helper - Configure Table View
-
+    
     fileprivate func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.backgroundColor = .white
         tableView.rowHeight = 80
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(ChatCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
         
         view.addSubview(tableView)
@@ -128,8 +133,8 @@ extension ConversationsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = chats[indexPath.row].message.text
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ChatCell
+        cell.chat = chats[indexPath.row]
         return cell
     }
 }
@@ -138,7 +143,9 @@ extension ConversationsController: UITableViewDataSource {
 
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let user = chats[indexPath.row].user
+        let controller = ChatController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -147,7 +154,7 @@ extension ConversationsController: UITableViewDelegate {
 extension ConversationsController: NewChatControllerDelegate {
     func controller(_ controller: NewChatController, wantsToChatWith user: User) {
         controller.dismiss(animated: true, completion: nil)
-        let chat = ChatController(user: user)
-        navigationController?.pushViewController(chat, animated: true)
+        let controller = ChatController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
