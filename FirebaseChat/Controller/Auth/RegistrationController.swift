@@ -28,7 +28,7 @@ class RegistrationController: UIViewController {
     }()
     
     private lazy var emailContainerView: CredentialsTextFieldView = {
-        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blend"), textField: emailTextField)
+        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blue"), textField: emailTextField)
     }()
         
     private lazy var fullnameContainerView: CredentialsTextFieldView = {
@@ -40,7 +40,7 @@ class RegistrationController: UIViewController {
     }()
 
     private lazy var passwordContainerView: CredentialsTextFieldView = {
-        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "lock-object-color"), textField: passwordTextField)
+        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "key-object-color"), textField: passwordTextField)
     }()
     
     private var nicknameTextField = CustomTextField(placeholder: "Nickname")
@@ -58,8 +58,8 @@ class RegistrationController: UIViewController {
     
     private let goToLoginButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Log In", attributes: [.foregroundColor: UIColor.red, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: [.foregroundColor: UIColor.secondaryTextColor, .font: UIFont.systemFont(ofSize: 16)])
+        attributedTitle.append(NSAttributedString(string: "Log In", attributes: [.foregroundColor: UIColor.primaryPurple, .font: UIFont.boldSystemFont(ofSize: 16)]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button

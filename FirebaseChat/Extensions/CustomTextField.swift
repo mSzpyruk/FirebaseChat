@@ -17,7 +17,7 @@ class CustomTextField: UITextField {
         borderStyle = .none
         textColor = .black
         heightAnchor.constraint(equalToConstant: 50).isActive = true
-        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.lightGray])
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.secondaryTextColor])
         isSecureTextEntry = isSecureField!
     }
     

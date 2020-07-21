@@ -13,8 +13,8 @@ class CustomAuthButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layer.cornerRadius = 5
-        backgroundColor = #colorLiteral(red: 0.9214009643, green: 0.534648478, blue: 0.5309287906, alpha: 1).withAlphaComponent(0.5)
+        layer.cornerRadius = 3
+        backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.768627451, blue: 0.9137254902, alpha: 1).withAlphaComponent(0.5)
         setHeight(height: 50)
         isEnabled = false
         setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)

@@ -23,16 +23,16 @@ class CredentialsTextFieldView: UIView {
         addSubview(iv)
         iv.centerY(inView: self)
         iv.anchor(right: rightAnchor, paddingRight: 8)
-        iv.setDimensions(height: 28, width: 28)
+        iv.setDimensions(height: 24, width: 24)
         
         addSubview(textField)
         textField.centerY(inView: self)
-        textField.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8)
+        textField.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 4)
         
         let bottomBorder = UIView()
-        bottomBorder.backgroundColor = .black
+        bottomBorder.backgroundColor = .dividerColor
         addSubview(bottomBorder)
-        bottomBorder.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1)
+        bottomBorder.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 4, paddingRight: 4, height: 1)
     }
     
     required init?(coder: NSCoder) {

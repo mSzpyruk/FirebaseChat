@@ -24,16 +24,25 @@ class LoginController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "speech bubbles (rounded)-communication-color")
+        iv.image = #imageLiteral(resourceName: "chat")
         return iv
     }()
     
+    private let mainLabel: UILabel = {
+       let label = UILabel()
+        let attributedLabel = NSMutableAttributedString(string: "Proceed with your\n", attributes: [.foregroundColor: UIColor.primaryText, .font: UIFont.systemFont(ofSize: 30, weight: .thin)])
+        attributedLabel.append(NSAttributedString(string: "Login", attributes: [.foregroundColor: UIColor.primaryText, .font: UIFont.systemFont(ofSize: 36, weight: .bold)]))
+        label.attributedText = attributedLabel
+        label.numberOfLines = 2
+        return label
+    }()
+    
     private lazy var emailContainerView: CredentialsTextFieldView = {
-        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blend"), textField: emailTextField)
+        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "email-blue"), textField: emailTextField)
     }()
     
     private lazy var passwordContainerView: CredentialsTextFieldView = {
-        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "lock-object-color"), textField: passwordTextField)
+        return CredentialsTextFieldView(image: #imageLiteral(resourceName: "key-object-color"), textField: passwordTextField)
     }()
     
     private var emailTextField = CustomTextField(placeholder: "Email")
@@ -49,8 +58,8 @@ class LoginController: UIViewController {
     
     private let goToRegistrationButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 16)])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.red, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.secondaryTextColor, .font: UIFont.systemFont(ofSize: 16)])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.foregroundColor: UIColor.primaryPurple, .font: UIFont.boldSystemFont(ofSize: 16)]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
         return button
@@ -102,11 +111,26 @@ class LoginController: UIViewController {
         updateForm()
     }
     
+    @objc func keyboardShow() {
+        if view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keyboardHide() {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     //MARK: - Helpers
     
     func configureNotificationObservers() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func updateForm() {
@@ -128,6 +152,9 @@ class LoginController: UIViewController {
         logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         logoImageView.setDimensions(height: 200, width: 200)
         
+        view.addSubview(mainLabel)
+        mainLabel.anchor(top: logoImageView.bottomAnchor, left: view.leftAnchor, paddingTop: 32, paddingLeft: 32)
+        
         let loginStack = UIStackView(arrangedSubviews: [emailContainerView,
                                                         passwordContainerView,
                                                         loginButton])
@@ -135,9 +162,9 @@ class LoginController: UIViewController {
         loginStack.spacing = 16
         
         view.addSubview(loginStack)
-        loginStack.anchor(top: logoImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        loginStack.anchor(top: mainLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 50, paddingLeft: 32, paddingRight: 32)
         
         view.addSubview(goToRegistrationButton)
-        goToRegistrationButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+        goToRegistrationButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingBottom: 16 , paddingRight: 32)
     }
 }

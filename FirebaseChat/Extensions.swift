@@ -13,6 +13,20 @@ public struct AnchoredConstraints {
     public var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
 }
 
+extension UIColor {
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    }
+    static let primaryPurple = UIColor.rgb(red: 103, green: 58, blue: 183)
+    static let darkPrimaryPurple = UIColor.rgb(red: 32, green: 18, blue: 66)
+    static let lightPrimaryColor = UIColor.rgb(red: 82, green: 77, blue: 91)
+    static let primaryText = UIColor.rgb(red: 33, green: 33, blue: 33)
+    static let accentYellowColor = UIColor.rgb(red: 255, green: 193, blue: 7)
+    static let dividerColor = UIColor.rgb(red: 189, green: 189, blue: 189)
+    static let secondaryTextColor = UIColor.rgb(red: 117, green: 117, blue: 117)
+
+}
+
 extension UIViewController {
     static let hud = JGProgressHUD(style: .light)
     func showProgressLoader(_ show: Bool, withText text: String? = "Loading") {
@@ -29,7 +43,7 @@ extension UIViewController {
     func configureNavigationBar(withTitle title: String, prefersLargeTitles: Bool) {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.configureWithOpaqueBackground()
-        barAppearance.backgroundColor = .systemPink
+        barAppearance.backgroundColor = .primaryPurple
         barAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         
         navigationItem.title = title

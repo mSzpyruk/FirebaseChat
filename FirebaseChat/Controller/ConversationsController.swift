@@ -24,8 +24,8 @@ class ConversationsController: UIViewController {
     private let newChatButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.backgroundColor = .systemPink
-        button.tintColor = .white
+        button.backgroundColor = .lightPrimaryColor
+        button.tintColor = .primaryText
         button.imageView?.setDimensions(height: 24, width: 24)
         button.addTarget(self, action: #selector(showNewChat), for: .touchUpInside)
         return button
